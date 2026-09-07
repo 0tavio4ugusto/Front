@@ -1,9 +1,9 @@
 .card {
-  background: white;
+  background: #1a1228;
   border-radius: 16px;
   padding: 28px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 6px 16px rgba(0, 0, 0, 0.06);
-  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border: 1px solid #2a1f3d;
 }
 
 .title {
@@ -13,12 +13,12 @@
 .title h2 {
   font-size: 20px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: #f5c542;
 }
 
 .title p {
   margin: 4px 0 0;
-  color: #9ca3af;
+  color: #7a6b91;
   font-size: 14px;
 }
 
@@ -37,7 +37,7 @@
 .field label {
   font-weight: 600;
   font-size: 13px;
-  color: #374151;
+  color: #b8a9d4;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -45,19 +45,29 @@
 .field input,
 .field select {
   padding: 12px 14px;
-  border: 1.5px solid #e5e7eb;
+  border: 1.5px solid #2a1f3d;
   border-radius: 10px;
   font-size: 14px;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
-  background: #fafafa;
+  background: #130e1f;
+  color: #e8e0f0;
+}
+
+.field input::placeholder {
+  color: #5a4d6e;
 }
 
 .field input:focus,
 .field select:focus {
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.12);
-  background: white;
+  border-color: #c084fc;
+  box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.15);
+  background: #1a1228;
+}
+
+.field select option {
+  background: #1a1228;
+  color: #e8e0f0;
 }
 
 .actions {
@@ -71,7 +81,7 @@
   padding: 13px;
   border: none;
   border-radius: 10px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #7c3aed, #c084fc);
   color: white;
   font-size: 15px;
   font-weight: 700;
@@ -89,7 +99,8 @@
 }
 
 .button:disabled {
-  background: #d1d5db;
+  background: #2a1f3d;
+  color: #5a4d6e;
   cursor: not-allowed;
   transform: none;
 }
@@ -97,10 +108,10 @@
 .cancelButton {
   flex: 1;
   padding: 13px;
-  border: 1.5px solid #e5e7eb;
+  border: 1.5px solid #2a1f3d;
   border-radius: 10px;
-  background: white;
-  color: #6b7280;
+  background: transparent;
+  color: #9b8bb4;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
@@ -108,29 +119,29 @@
 }
 
 .cancelButton:hover {
-  background: #f9fafb;
+  background: #1a1228;
 }
 
 .success {
   margin-top: 16px;
   padding: 12px 14px;
   border-radius: 10px;
-  background: #ecfdf5;
-  color: #065f46;
+  background: rgba(34, 197, 94, 0.1);
+  color: #4ade80;
   font-size: 14px;
   font-weight: 500;
-  border: 1px solid #a7f3d0;
+  border: 1px solid rgba(34, 197, 94, 0.2);
 }
 
 .error {
   margin-top: 16px;
   padding: 12px 14px;
   border-radius: 10px;
-  background: #fef2f2;
-  color: #991b1b;
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
   font-size: 14px;
   font-weight: 500;
-  border: 1px solid #fecaca;
+  border: 1px solid rgba(239, 68, 68, 0.2);
 }
 
 @media (max-width: 700px) {

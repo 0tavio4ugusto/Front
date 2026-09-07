@@ -1,21 +1,25 @@
 .main {
   max-width: 900px;
   margin: 0 auto;
-  padding: 30px 20px 60px;
+  padding: 50px 20px 60px;
 }
 
 .introduction {
   margin-bottom: 28px;
+  text-align: center;
 }
 
 .introduction h2 {
-  font-size: 26px;
-  font-weight: 700;
-  color: #1a1a2e;
+  font-size: 34px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #c084fc, #f5c542);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .introduction p {
-  color: #6b7280;
-  margin-top: 6px;
+  color: #9b8bb4;
+  margin-top: 8px;
   font-size: 15px;
 }

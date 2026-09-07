@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Header from "./components/Header/Header";
 import TarefaForm from "./components/TarefaForm/TarefaForm";
 import TarefaList from "./components/TarefaList/TarefaList";
 import styles from "./App.module.css";
@@ -27,28 +26,24 @@ function App() {
   }
 
   return (
-    <>
-      <Header />
+    <main className={styles.main}>
+      <section className={styles.introduction}>
+        <h2>Organizavio</h2>
+        <p>Gerencie suas tarefas do dia a dia</p>
+      </section>
 
-      <main className={styles.main}>
-        <section className={styles.introduction}>
-          <h2>Gerencie suas Tarefas</h2>
-          <p>Cadastre novas tarefas e acompanhe suas atividades do dia a dia.</p>
-        </section>
+      <TarefaForm
+        onTarefaSaved={handleTarefaSaved}
+        editing={editing}
+        onCancelEdit={handleCancelEdit}
+      />
 
-        <TarefaForm
-          onTarefaSaved={handleTarefaSaved}
-          editing={editing}
-          onCancelEdit={handleCancelEdit}
-        />
-
-        <TarefaList
-          refresh={refresh}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-        />
-      </main>
-    </>
+      <TarefaList
+        refresh={refresh}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
+    </main>
   );
 }
 

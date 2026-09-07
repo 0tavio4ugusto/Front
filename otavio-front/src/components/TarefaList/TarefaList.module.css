@@ -5,7 +5,7 @@
 .section h2 {
   font-size: 20px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: #f5c542;
   margin-bottom: 18px;
 }
 
@@ -16,17 +16,18 @@
 }
 
 .card {
-  background: white;
+  background: #1a1228;
   border-radius: 14px;
   padding: 20px 22px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.06);
-  border: 1px solid #e5e7eb;
-  transition: box-shadow 0.2s, transform 0.2s;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+  border: 1px solid #2a1f3d;
+  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
 }
 
 .card:hover {
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 24px rgba(124, 58, 237, 0.2);
   transform: translateY(-2px);
+  border-color: #7c3aed;
 }
 
 .cardHeader {
@@ -39,12 +40,12 @@
 .cardHeader strong {
   font-size: 17px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: #f0e6ff;
 }
 
 .card p {
   margin: 0 0 12px;
-  color: #6b7280;
+  color: #9b8bb4;
   font-size: 14px;
   line-height: 1.5;
 }
@@ -53,7 +54,7 @@
   display: flex;
   gap: 18px;
   font-size: 13px;
-  color: #9ca3af;
+  color: #7a6b91;
 }
 
 .tag {
@@ -66,23 +67,23 @@
 
 .alta {
   composes: tag;
-  background: #fef2f2;
-  color: #dc2626;
-  border: 1px solid #fecaca;
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.25);
 }
 
 .media {
   composes: tag;
-  background: #fffbeb;
-  color: #d97706;
-  border: 1px solid #fde68a;
+  background: rgba(245, 197, 66, 0.12);
+  color: #f5c542;
+  border: 1px solid rgba(245, 197, 66, 0.25);
 }
 
 .baixa {
   composes: tag;
-  background: #ecfdf5;
-  color: #059669;
-  border: 1px solid #a7f3d0;
+  background: rgba(34, 197, 94, 0.12);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.25);
 }
 
 .cardActions {
@@ -90,7 +91,7 @@
   gap: 10px;
   margin-top: 16px;
   padding-top: 16px;
-  border-top: 1px solid #f3f4f6;
+  border-top: 1px solid #2a1f3d;
 }
 
 .editBtn,
@@ -105,39 +106,40 @@
 }
 
 .editBtn {
-  background: #eff6ff;
-  color: #2563eb;
-  border: 1px solid #bfdbfe;
+  background: rgba(124, 58, 237, 0.15);
+  color: #c084fc;
+  border: 1px solid rgba(124, 58, 237, 0.3);
 }
 
 .editBtn:hover {
-  background: #dbeafe;
+  background: rgba(124, 58, 237, 0.25);
   transform: translateY(-1px);
 }
 
 .deleteBtn {
-  background: #fef2f2;
-  color: #dc2626;
-  border: 1px solid #fecaca;
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.25);
 }
 
 .deleteBtn:hover {
-  background: #fee2e2;
+  background: rgba(239, 68, 68, 0.2);
   transform: translateY(-1px);
 }
 
 .message {
-  color: #9ca3af;
+  color: #7a6b91;
   margin-top: 20px;
   font-size: 15px;
+  text-align: center;
 }
 
 .error {
-  color: #991b1b;
-  background: #fef2f2;
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.1);
   padding: 14px;
   border-radius: 10px;
   margin-top: 20px;
-  border: 1px solid #fecaca;
+  border: 1px solid rgba(239, 68, 68, 0.2);
   font-size: 14px;
 }
