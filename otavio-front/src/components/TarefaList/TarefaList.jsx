@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { getTarefas } from "../../services/api";
+import { getTarefas, deleteTarefa } from "../../services/api";
 import styles from "./TarefaList.module.css";
 
-function TarefaList({ refresh }) {
+function TarefaList({ refresh, onEdit, onDelete }) {
   const [tarefas, setTarefas] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -16,6 +16,17 @@ function TarefaList({ refresh }) {
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
   }, [refresh]);
+
+  async function handleDelete(id) {
+    if (!confirm("Tem certeza que deseja excluir esta tarefa?")) return;
+
+    try {
+      await deleteTarefa(id);
+      if (onDelete) onDelete();
+    } catch (e) {
+      alert("Erro ao excluir: " + e.message);
+    }
+  }
 
   if (loading) {
     return <p className={styles.message}>Carregando tarefas...</p>;
@@ -46,6 +57,20 @@ function TarefaList({ refresh }) {
             <div className={styles.meta}>
               <span>📁 {tarefa.categoria}</span>
               <span>📅 {tarefa.data}</span>
+            </div>
+            <div className={styles.cardActions}>
+              <button
+                className={styles.editBtn}
+                onClick={() => onEdit(tarefa)}
+              >
+                ✏️ Editar
+              </button>
+              <button
+                className={styles.deleteBtn}
+                onClick={() => handleDelete(tarefa.id)}
+              >
+                🗑️ Excluir
+              </button>
             </div>
           </div>
         ))}

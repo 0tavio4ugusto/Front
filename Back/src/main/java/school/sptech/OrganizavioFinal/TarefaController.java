@@ -46,6 +46,40 @@ public class TarefaController {
 
         int idGerado = holder.getKey().intValue();
         tarefa.setId(idGerado);
+        return ResponseEntity.status(201).body(tarefa);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Tarefa> atualizar(@PathVariable Integer id, @RequestBody Tarefa tarefa) {
+        String sql = "UPDATE tarefa SET titulo = ?, descricao = ?, prioridade = ?, categoria = ?, data = ? WHERE id = ?";
+
+        int rows = template.update(sql,
+                tarefa.getTitulo(),
+                tarefa.getDescricao(),
+                tarefa.getPrioridade(),
+                tarefa.getCategoria(),
+                tarefa.getData(),
+                id
+        );
+
+        if (rows == 0) {
+            return ResponseEntity.status(404).build();
+        }
+
+        tarefa.setId(id);
         return ResponseEntity.status(200).body(tarefa);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
+        String sql = "DELETE FROM tarefa WHERE id = ?";
+
+        int rows = template.update(sql, id);
+
+        if (rows == 0) {
+            return ResponseEntity.status(404).build();
+        }
+
+        return ResponseEntity.status(200).build();
     }
 }

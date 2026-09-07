@@ -1,19 +1,36 @@
-import { useState } from "react";
-import { createTarefa } from "../../services/api";
+import { useState, useEffect } from "react";
+import { createTarefa, updateTarefa } from "../../services/api";
 import styles from "./TarefaForm.module.css";
 
-function TarefaForm({ onTarefaCreated }) {
-  const [formData, setFormData] = useState({
-    titulo: "",
-    descricao: "",
-    prioridade: "",
-    categoria: "",
-    data: "",
-  });
+const emptyForm = {
+  titulo: "",
+  descricao: "",
+  prioridade: "",
+  categoria: "",
+  data: "",
+};
 
+function TarefaForm({ onTarefaSaved, editing, onCancelEdit }) {
+  const [formData, setFormData] = useState(emptyForm);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (editing) {
+      setFormData({
+        titulo: editing.titulo,
+        descricao: editing.descricao,
+        prioridade: editing.prioridade,
+        categoria: editing.categoria,
+        data: editing.data,
+      });
+      setSuccess("");
+      setError("");
+    } else {
+      setFormData(emptyForm);
+    }
+  }, [editing]);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -31,20 +48,18 @@ function TarefaForm({ onTarefaCreated }) {
     setError("");
 
     try {
-      await createTarefa(formData);
+      if (editing) {
+        await updateTarefa(editing.id, formData);
+        setSuccess("Tarefa atualizada com sucesso!");
+      } else {
+        await createTarefa(formData);
+        setSuccess("Tarefa cadastrada com sucesso!");
+      }
 
-      setSuccess("Tarefa cadastrada com sucesso!");
+      setFormData(emptyForm);
 
-      setFormData({
-        titulo: "",
-        descricao: "",
-        prioridade: "",
-        categoria: "",
-        data: "",
-      });
-
-      if (onTarefaCreated) {
-        onTarefaCreated();
+      if (onTarefaSaved) {
+        onTarefaSaved();
       }
     } catch (error) {
       setError(error.message);
@@ -56,8 +71,8 @@ function TarefaForm({ onTarefaCreated }) {
   return (
     <section className={styles.card}>
       <div className={styles.title}>
-        <h2>Nova Tarefa</h2>
-        <p>Preencha os dados da tarefa</p>
+        <h2>{editing ? "Editar Tarefa" : "Nova Tarefa"}</h2>
+        <p>{editing ? "Atualize os dados da tarefa" : "Preencha os dados da tarefa"}</p>
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -137,9 +152,23 @@ function TarefaForm({ onTarefaCreated }) {
         {success && <div className={styles.success}>{success}</div>}
         {error && <div className={styles.error}>{error}</div>}
 
-        <button type="submit" disabled={loading} className={styles.button}>
-          {loading ? "Cadastrando..." : "Cadastrar tarefa"}
-        </button>
+        <div className={styles.actions}>
+          <button type="submit" disabled={loading} className={styles.button}>
+            {loading
+              ? editing ? "Salvando..." : "Cadastrando..."
+              : editing ? "Salvar alterações" : "Cadastrar tarefa"}
+          </button>
+
+          {editing && (
+            <button
+              type="button"
+              className={styles.cancelButton}
+              onClick={onCancelEdit}
+            >
+              Cancelar
+            </button>
+          )}
+        </div>
       </form>
     </section>
   );

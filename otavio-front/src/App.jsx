@@ -6,8 +6,23 @@ import styles from "./App.module.css";
 
 function App() {
   const [refresh, setRefresh] = useState(0);
+  const [editing, setEditing] = useState(null);
 
-  function handleTarefaCreated() {
+  function handleTarefaSaved() {
+    setEditing(null);
+    setRefresh((previous) => previous + 1);
+  }
+
+  function handleEdit(tarefa) {
+    setEditing(tarefa);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function handleCancelEdit() {
+    setEditing(null);
+  }
+
+  function handleDelete() {
     setRefresh((previous) => previous + 1);
   }
 
@@ -21,9 +36,17 @@ function App() {
           <p>Cadastre novas tarefas e acompanhe suas atividades do dia a dia.</p>
         </section>
 
-        <TarefaForm onTarefaCreated={handleTarefaCreated} />
+        <TarefaForm
+          onTarefaSaved={handleTarefaSaved}
+          editing={editing}
+          onCancelEdit={handleCancelEdit}
+        />
 
-        <TarefaList refresh={refresh} />
+        <TarefaList
+          refresh={refresh}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
       </main>
     </>
   );

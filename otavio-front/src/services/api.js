@@ -1,23 +1,25 @@
-const API_URL = "http://localhost:8080";
+import axios from "axios";
+
+const api = axios.create({
+  baseURL: "http://localhost:8080",
+});
 
 export async function getTarefas() {
-  const response = await fetch(`${API_URL}/tarefas`);
-  if (!response.ok) {
-    throw new Error("Não foi possível carregar as tarefas.");
-  }
-  return response.json();
+  const response = await api.get("/tarefas");
+  return response.data;
 }
 
 export async function createTarefa(tarefa) {
-  const response = await fetch(`${API_URL}/tarefas`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(tarefa),
-  });
-  if (!response.ok) {
-    throw new Error("Não foi possível cadastrar a tarefa.");
-  }
-  return response.json();
+  const response = await api.post("/tarefas", tarefa);
+  return response.data;
+}
+
+export async function updateTarefa(id, tarefa) {
+  const response = await api.put(`/tarefas/${id}`, tarefa);
+  return response.data;
+}
+
+export async function deleteTarefa(id) {
+  const response = await api.delete(`/tarefas/${id}`);
+  return response.data;
 }
